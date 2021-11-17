@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+</head>
+
+<body>
+    
+    <ul>
+        <li><a href="{% url 'register' %}">SIGN UP</a></li>
+        <li><a href="{% url 'login_user' %}">LOG IN</a></li>
+        <li><em>|</em></li>
+        <li><a class="active" href="#">HOME</a></li>
+        <li class="logo">bikers.com</li>
+      </ul>
+    <div class="box">
+        <h1>Bike for everyone!</h1>
+        <h3>Make your travel healthier and more convenient</h3>
+        <div class="last">
+            <img src="images/捕获.PNG" height="50" ><h6>Contact Us : contact@bikers.com ; 07546389640</h6>
+        <span class="submit">
+            <a href="{% url 'contact' %}">FEEDBACK</a>
+        </span></div>
+    </div>
+</body>
+
+</html>

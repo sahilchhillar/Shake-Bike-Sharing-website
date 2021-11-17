@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'manager/css/manager.css' %}">
+    <script src="{% static 'manager/js/echarts.min.js' %}"></script>
+    <script src="{% static 'manager/js/jquery-3.1.1.min.js' %}"></script>
+
+
+</head>
+
+<body>
+    
+
+    <div class="body">
+        <div class="clear-left">
+           
+        </div>
+        <div class="table">
+            <div class="top">
+
+                <a class="active1" href="javascript:;">Rent Location</a>
+                <a href="javascript:;">Return Location</a>
+                <a href="javascript:;">Money</a>
+            </div>
+            <div class="box start" style="display: block;"></div>
+            <div class="box end"></div>
+            <div class="box money"></div>
+        </div>
+        <div class="clear-right"></div>
+    </div>
+    <script src="{% static 'manager/js/manager.js' %}"></script>
+</body>
+
+</html>

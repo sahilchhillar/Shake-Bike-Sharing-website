@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head></head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Renting Locations Over Glasgow</title>
+  <style>
+    #map{
+      height: 600px;
+      width:100%;
+    }
+  </style>
+</head>
+<body>
+  <h1> My Bike Locations</h1>
+  <form action="{% url 'rentbike' %}" method="post">
+    {% csrf_token %}
+    <button id='rent'>Rent</button>
+  </form>
+
+  <form action="{% url 'returnbike' %" method="post">
+    {% csrf_token %}
+    <button id='return'>Return</button>
+  </form>
+  
+      <div id="map"></div>
+  <script>
+    function initMap(){
+      // Map Options
+      var options = {
+        zoom:13,
+        center:{lat:55.8650,lng:-4.2508} 
+
+      }
+      //New Map
+      var map = new 
+      google.maps.Map(document.getElementById('map'),options);
+      //Add marker
+     /* var marker = new google.maps.Marker({
+        position:{lat:55.8724,lng:-4.2900},
+        map:map,
+        //ico='https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      });
+
+      var infoWindow = new google.maps.infoWindow({
+        content: '<h1>Lynn Mac</h1>'
+
+      });
+
+      marker.addListener('click', function(){
+        infoWindow.open(maps,marker); 
+      });
+      */
+      // addMarker ({coords:{lat:55.8724,lng:-4.2900}}); //Uni of Glasgow
+      // addMarker ({coords:{lat:55.8698,lng:-4.3087}}); //Partik
+      // addMarker ({coords:{lat:55.8650,lng:-4.2508}}); // Buchanan
+      // addMarker ({coords:{lat:55.8630,lng:-4.2346}}); //Glasgow Cathedral
+      // addMarker ({coords:{lat:55.8591,lng:-4.2581}}); //Glasgow Central
+      // addMarker ({coords:{lat:55.8585,lng:-4.2938}}); //Glasgow Science Center
+      // addMarker ({coords:{lat:55.8661,lng:-4.2637}}); //Glasgow School of Art
+      // addMarker ({coords:{lat:55.8524,lng:-4.2515}}); //Mosque     
+      // function addMarker(props){
+      //   var marker = new google.maps.Marker({
+      //   position:props.coords,
+      //   map:map,
+      //   icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+
+
+    });
+  }
+}
+  
+</body>
+</html>
+
+
+
+  

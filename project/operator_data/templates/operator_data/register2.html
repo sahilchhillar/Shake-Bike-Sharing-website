@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register/css/registration.css' %}">
+</head>
+<body>
+    <div class="form">
+        <div class="login-head">
+            <h1>Registration</h1>			
+        </div>
+        <form action="register" method="POST">
+            {% csrf_token %}
+			<li class="user">
+				<input class="text" type="text" value="Username" name="username" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+			</li>
+            <li class="email">
+                <input class="text" type="email" value="Email" name="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+            </li>
+            <li class="password">
+				<input class="text" type="password" value="Password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+			</li>
+            <li class="password">
+				<input class="text" type="password" value="Confirm Password" name="confirm_password" placeholder="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+			</li>
+			<span class="submit">
+				<input class="button" type="submit" value="Register" id="submit">
+            </span>
+            <span class="back">
+				{{ confirm }}
+            </span>	
+		</form>
+    </div>
+</body>
+</html>

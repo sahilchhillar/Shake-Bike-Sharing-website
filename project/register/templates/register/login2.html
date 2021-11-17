@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register/css/login.css' %}">
+</head>
+<body>
+    <div class="form">
+        <div class="login-head">
+            <h1>Login</h1>			
+        </div>
+        <form action="{% url 'login_user' %}" method="POST">
+            {% csrf_token %}
+			<li class="user">
+				<input class="text" type="text" value="Username" name="username" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+			</li>
+            <li class="password">
+				<input class="text" type="password" value="Password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+			</li>
+			<span class="submit">
+				<input class="button" type="submit" value="Sign in" id="submit">
+            </span>
+            <span class="back">
+				<h4> {{ confirm }} </h4>
+            </span>	
+		</form>
+    </div>
+</body>
+</html>

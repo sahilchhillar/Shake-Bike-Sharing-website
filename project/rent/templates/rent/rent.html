@@ -1,0 +1,238 @@
+<head>
+{% load static %}
+<link rel="stylesheet"type="text/css"href="{% static 'rent/menu.css' %}"title="style">
+</head>
+<style>
+  .bike{
+    width: 100px;
+    height: 30px;
+  }
+
+  .bikeId{
+    font-size: 40px;
+  }
+    .header {
+        position: absolute;
+        top: 55px;
+        left: 0px;
+        right: 0px;
+        height: 100px;
+        background-color: green;
+        color: #fff;
+    }
+    .content {
+        margin-top: 130px;
+    }
+   .row {
+  top: 45%;
+  left: 50%;
+position: absolute;
+ /*向左向上偏移50%*/
+  transform: translate(-50%, -50%);
+    }
+    .greenbg {
+        width:10px;
+        background-color: #0f0;
+    }
+
+    .greenbr {
+        width:200px;
+        height:30px;
+        margin-top: 20px;
+        text-align: center;
+        border: solid;
+        border-radius: 8px;
+        border-color: #0a0;
+        color: #0a0;
+    }
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+border-radius: 12px;
+}
+.butt{
+text-align: center;
+margin-top: 50px;
+margin-bottom: 30px;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#map{
+      height: 600px;
+      width:100%;
+    }
+
+</style>
+
+<script>
+  function getByClass(parent, cls) {
+        if (parent.getElementsByClassName) {
+            return parent.getElementsByClassName(cls);
+        } else {
+            var res = [];
+            var reg = new RegExp(' ' + cls + ' ', 'i')
+            var ele = parent.getElementsByTagName('*');
+            for (var i = 0; i < ele.length; i++) {
+                if (reg.test(' ' + ele[i].className + ' ')) {
+                    res.push(ele[i]);
+                }
+            }
+            return res;
+        }
+    }
+
+  function get(index) {
+        var choose = getByClass(document, 'greenbr');
+        for (let i = 0; i < choose.length; i++) {            
+            choose[i].style.backgroundColor = "#fff";
+            choose[i].style.color = "#0a0";
+        }
+        choose[index].style.backgroundColor = "#0a0";
+        choose[index].style.color = "#fff";
+
+        var count = document.getElementById("count");
+        if(index == 0) { money = 5; } else
+        if(index == 1) { money = 10; } else
+        if(index == 2) { money = 15; } else
+        if(index == 3) { money = 20; } 
+        count.value = money;
+    } 
+</script>
+
+<body>
+<ul>
+ <li style="float:left"><a>bikers.com</a></li>
+ <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+ <li><em>|</em></li>
+ <li><a class="active" href="{% url 'index' %}">HOME</a></li>
+  <li><a href="{% url 'report' %}">REPORT</a></li>
+  <li><a href="{% url 'wallet' %}">WALLET</a></li>
+  <li><a href="{% url 'rentbike' %}">RENT</a></li>
+<!-- <li><a href="return.html">Renturn</a></li>
+<li><a  class="active"  href="rent.html">Rent</a></li> -->
+</ul>
+
+<div class="header">
+<h1 align="center">Rent</h1>
+</div>
+
+<form class="content" action="{% url 'rentbike' %}" align="center" method="post">
+
+    {% csrf_token %}
+
+
+<label style="text-align:left;font-size:30px"> Rent Location:</label>
+<select name="rentloc" style="font-size:25px;margin-top: 50px;">
+<option value="Glasgow School of Arts">Glasgow School Of Art</option>
+<option value="UofG">University Of Glasgow</option>
+<option value="Buchanan Bus Station">Buchanan Bus Station</option>
+<option value="Glasgow Botanic Station">Glasgow Botanic Station</option>
+<option value="UofSc">University Of Strathclyde</option>
+<option value="Glasgow Central">Glasgow Central</option>
+<option value="Glasgow Cathedral">Glasgow Cathedral</option>
+</select>
+
+<br>
+
+<p class="bikeId">
+  Bike Id:  <input type="text" name="bikeId" placeholder="Enter Bike Id" class="bike">
+</p>
+
+
+<!-- <p>
+<label  style="text-align:left;font-size:30px">Return Location:</label>
+<select name="returnloc" style="font-size:25px;margin-top: 80px;">
+<option value="Glasgow School of Arts">Glasgow School Of Art</option>
+<option value="UofG">University Of Glasgow</option>
+<option value="Buchanan Bus Station">Buchanan Bus Station</option>
+<option value="Glasgow Botanic Station">Glasgow Botanic Station</option>
+<option value="UofSc">University Of Strathclyde</option>
+<option value="Glasgow Central">Glasgow Central</option>
+<option value="Glasgow Cathedral">Glasgow Cathedral</option>
+</select>
+
+<p> -->
+
+<div class="butt">
+<button class="button">Submit</button>
+</div>
+
+  {% comment %} <form action="{% url 'rentbike' %}" method="post">
+    {% csrf_token %}
+    <button id='rent'>Rent</button>
+  </form>
+
+  <form action="{% url 'returnbike' %}" method="post">
+    {% csrf_token %}
+    <button id='return'>Return</button>
+  </form> {% endcomment %}
+  
+<div id="map"></div>
+  <script>
+    function initMap(){
+      // Map Options
+      var options = {
+        zoom:13,
+        center:{lat:55.8650,lng:-4.2508} 
+
+      }
+      //New Map
+      var map = new 
+      google.maps.Map(document.getElementById('map'),options);
+      //Add marker
+     /* var marker = new google.maps.Marker({
+        position:{lat:55.8724,lng:-4.2900},
+        map:map,
+        //ico='https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      });
+
+      var infoWindow = new google.maps.infoWindow({
+        content: '<h1>Lynn Mac</h1>'
+
+      });
+
+      marker.addListener('click', function(){
+        infoWindow.open(maps,marker); 
+      });
+      */
+//       addMarker ({coords:{lat:55.8724,lng:-4.2900}}); //Uni of Glasgow
+//       addMarker ({coords:{lat:55.8698,lng:-4.3087}}); //Partik
+//       addMarker ({coords:{lat:55.8650,lng:-4.2508}}); // Buchanan
+//       addMarker ({coords:{lat:55.8630,lng:-4.2346}}); //Glasgow Cathedral
+//       addMarker ({coords:{lat:55.8591,lng:-4.2581}}); //Glasgow Central
+//       addMarker ({coords:{lat:55.8585,lng:-4.2938}}); //Glasgow Science Center
+//       addMarker ({coords:{lat:55.8661,lng:-4.2637}}); //Glasgow School of Art
+//       addMarker ({coords:{lat:55.8524,lng:-4.2515}}); //Mosque     
+//       function addMarker(props){
+//         var marker = new google.maps.Marker({
+//         position:props.coords,
+//         map:map,
+//         icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+
+
+//     });
+//   }
+// }
+//   </script>
+
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=API&callback=initMap">
+  </script>
+
+</form>
+
+</body>

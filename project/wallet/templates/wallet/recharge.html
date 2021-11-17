@@ -1,0 +1,205 @@
+<head>
+
+{% load static %}
+<link rel="stylesheet"type="text/css"href="{% static 'wallet/menu.css' %}"title="style">
+</head>
+<style>
+    .header {
+        position: absolute;
+        top: 55px;
+        left: 0px;
+        right: 0px;
+        height: 100px;
+        background-color: green;
+        color: #fff;
+    }
+    .content {
+        margin-top: 130px;
+    }
+.count{
+position: absolute;
+left:43%;
+}
+input{
+background-color:transparent;border:0;
+width:200px;
+height:50px;
+font-size:60px;
+text-align:center;
+}
+/* .ope{
+ background-color: #4CAF50;  Green 
+    border: none;
+    color: white;
+    width:60px;
+height:60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+border-radius: 12px;
+position:absolute;
+margin-top:-10px;
+} 
+*/
+
+   .row {
+  top: 45%;
+  left: 17%;
+position: absolute;
+ /*向左向上移50%*/
+  transform: translate(-50%, -50%);
+    }
+    .greenbr {
+        width:200px;
+        height:50px;
+        text-align: center;
+font-size:24px;
+        border: solid;
+        border-radius: 8px;
+        border-color: #0a0;
+        color: #0a0;
+position: absolute;
+    }
+.secrow{
+margin-left:400px;
+}
+.thirow{
+margin-left:800px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+border-radius: 12px;
+
+}
+.butt{
+text-align: center;
+margin-top: 300px;
+}
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+
+<script>
+  function getByClass(parent, cls) {
+        if (parent.getElementsByClassName) {
+            return parent.getElementsByClassName(cls);
+        } else {
+            var res = [];
+            var reg = new RegExp(' ' + cls + ' ', 'i')
+            var ele = parent.getElementsByTagName('*');
+            for (var i = 0; i < ele.length; i++) {
+                if (reg.test(' ' + ele[i].className + ' ')) {
+                    res.push(ele[i]);
+                }
+            }
+            return res;
+        }
+    }
+
+  function get(index) {
+        var choose = getByClass(document, 'greenbr');
+        for (let i = 0; i < choose.length; i++) {            
+            choose[i].style.backgroundColor = "#fff";
+            choose[i].style.color = "#0a0";
+        }
+        choose[index].style.backgroundColor = "#0a0";
+        choose[index].style.color = "#fff";
+
+        var count = document.getElementById("count");
+
+        if(index == 0) { money = '5.00'; } else
+        if(index == 1) { money = '10.00'; } else
+        if(index == 2) { money = '15.00'; } else
+        if(index == 3) { money = '20.00'; }  else
+        if(index == 4) { money = '30.00'; }  else
+        if(index == 5) { money = '50.00'; } else
+{money='0.00';}
+        count.value = money;
+    } 
+
+// function plus(){
+// var count= document.getElementById("count");
+// var countv= document.getElementById("count").value;
+// var num_dec = parseInt(countv)+1;
+// count.value=num_dec.toFixed(2);
+// }
+// function minus(){
+// var count= document.getElementById("count");
+// var countv= document.getElementById("count").value;
+// var num_dec = parseInt(countv)-1;
+// count.value=num_dec.toFixed(2);
+// }
+</script>
+
+<body>
+<ul>
+    <li style="float:left"><a>bikers.com</a></li>
+    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    <li><em>|</em></li>
+    <li><a class="active" href="{% url 'index' %}">HOME</a></li>
+     <li><a href="{% url 'report' %}">REPORT</a></li>
+     <li><a href="{% url 'wallet' %}">WALLET</a></li>
+     <li><a href="{% url 'rentbike' %}">RENT</a></li>
+   <!-- <li><a href="return.html">Renturn</a></li>
+   <li><a  class="active"  href="rent.html">Rent</a></li> -->
+   </ul>
+</ul>
+
+<div class="header">
+<h1 align="center">Current balance: £ {{ balance }}</h1>
+</div>
+<div class="content">
+<h2 align="center">Your top up is :</h2>
+</div>
+<div class="plus" style="margin-left:580px;">
+</div>
+<div class="count" >
+<form action="{% url 'top_up' %}" method="post">
+    {% csrf_token %}
+    <input type="text"  id="count" name="count" value="0.00" min="0.00" max="50.00" step="0.01">
+
+    <div class="butt">
+        <button class="button">Top Up</button>
+    </div>
+</form>
+</div>
+<div class="minus" style="margin-left:850px;">
+</div>
+   <div class="row">
+                 <div class="firrow greenbr" onclick="get(0)">
+                    <strong>£5.00</strong>
+                </div>
+                <div class="secrow greenbr" onclick="get(1)">
+                    <strong>£10.00</strong>
+                </div>
+	    <div class="thirow greenbr" onclick="get(2)">
+                    <strong>£15.00</strong>
+                </div>
+                <div class="firrow greenbr" onclick="get(3)"  style="margin-top:80px">
+                    <strong>£20.00</strong>
+                </div>
+                <div class="secrow greenbr" onclick="get(4)"  style="margin-top:80px">
+                    <strong>£30.00</strong>
+            </div>
+	<div class="thirow greenbr" onclick="get(5)"  style="margin-top:80px">
+                    <strong>£50.00</strong>
+            </div>
+
+
+    </div>
+
+</body>
